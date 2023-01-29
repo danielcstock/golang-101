@@ -1,0 +1,10 @@
+https://random-status-code.herokuapp.com/- Status:false
+https://wwww.alura.com.br- Status:true
+28/01/2023 22:07:56 - https://random-status-code.herokuapp.com/- Status:false
+28/01/2023 22:08:02 - https://wwww.alura.com.br- Status:true
+28/01/2023 22:08:12 - https://random-status-code.herokuapp.com/- Status:false
+28/01/2023 22:08:17 - https://wwww.alura.com.br- Status:true
+28/01/2023 22:12:14 - https://random-status-code.herokuapp.com/- Status:false
+28/01/2023 22:12:20 - https://wwww.alura.com.br- Status:true
+28/01/2023 22:12:31 - https://random-status-code.herokuapp.com/- Status:false
+28/01/2023 22:12:36 - https://wwww.alura.com.br- Status:true
