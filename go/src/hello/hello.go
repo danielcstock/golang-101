@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -47,24 +50,47 @@ func showMenu() {
 	fmt.Println("2 - Exibir logs")
 }
 func startMonitoring() {
-	sites := getSitesNames()
-
 	fmt.Println("Monitorando...")
+
+	sites := getSitesNamesFromFile()
+
 	for _, site := range sites {
 		time.Sleep(delay)
 		siteTesting(site)
 	}
 }
 
-func getSitesNames() []string {
-	sites := []string{"https://random-status-code.herokuapp.com/", "https://wwww.alura.com.br"}
+func getSitesNamesFromFile() []string {
+	var sites []string
+	file, err := os.Open("sites.txt")
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao abrir o arquivo.", err)
+		return nil
+	}
+
+	reader := bufio.NewReader(file)
+	for {
+		line, err := reader.ReadString('\n')
+
+		sites = append(sites, strings.TrimSpace(line))
+
+		if err == io.EOF {
+			break
+		}
+	}
+
+	file.Close()
 
 	return sites
 }
 
 func siteTesting(site string) {
-	response, _ := http.Get(site)
-	if response.StatusCode == 200 {
+	response, err := http.Get(site)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao monitorar o site.", err)
+	} else if response.StatusCode == 200 {
 		fmt.Println("Site", site, "foi carregado com sucesso.")
 	} else {
 		fmt.Println("Site", site, "está com problemas. Status code", response.Status)
